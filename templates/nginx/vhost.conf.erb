@@ -48,9 +48,9 @@ server
 	location @phprouter
 	{
 		include fastcgi_params;
-		<% options['env_vars'].each do |key,value| %>
+		<% if options['env_vars']; options['env_vars'].each do |key,value| %>
 		fastcgi_param <%= key %> <%= value %>;
-		<% end %>
+		<% end; end %>
 		fastcgi_param SCRIPT_FILENAME $document_root/index.php;
 		fastcgi_pass 127.0.0.1:9000;
 	}
