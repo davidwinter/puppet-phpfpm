@@ -1,5 +1,7 @@
 This puppet module aims to be lightweight and help you get an nginx virtual host with php-fpm up and running quickly. It was developed with Vagrant in mind so that I could get a web environment up and running in as few lines as possible.
 
+**Note**: This module depends on my other, [nginx](https://github.com/davidwinter/puppet-nginx), in order for nginx to be installed and started.
+
 ## How to use
 
 Clone this into your modules directory. Then in your manifests file, add the following:
