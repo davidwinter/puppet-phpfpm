@@ -3,55 +3,28 @@ server
 	server_name <%= server_name %>;
 	root <%= root %>;
 
-	<% if server_name === '_' %>
-	server_name_in_redirect off;
-	<% end %>
+	client_max_body_size 100M;
 
-	<% if options['client_max_body_size'] %>
-	client_max_body_size <%= options['client_max_body_size'] %>;
-	<% end %>
-
-	<% if options['fastcgi_read_timeout'] %>
-	fastcgi_read_timeout <%= options['fastcgi_read_timeout'] %>;
-	<% end %>
-
-	<% if options['remove_indexphp_from_url'] %>
-	rewrite ^/index.php/?(.*) /$1 permanent;
-	<% end %>
-
-	<% if options['static_paths'] %>
-	location ~* ^/(<%= options['static_paths'].join('|') %>) { }
-	<% end %>
-
-	<% if options['maintenance_page'] %>
-	error_page 503 /<%= options['maintenance_page'] %>;
-	
-	# For when the maintenance page doesn't exist, pass it off to kohana so we 
-	# can display a pretty error.
-	location = /<%= options['maintenance_page'] %>
-	{
-		error_page 404 @phprouter;
-	}
-	<% end %>
+	index index.php;
 
 	location /
 	{
-		<% if options['maintenance_page'] %>
-		if (-f $document_root/<%= options['maintenance_page'] %>)
-		{
-			return 503;
-		}
-		<% end %>
+		try_files $uri $uri/ /index.php;
+	} 
 
-		try_files $uri @phprouter;
+	location ~* \.(js|css|png|jpg|jpeg|gif|ico)$ {
+		expires max;
+		log_not_found off;
+		access_log off;
 	}
-	location @phprouter
+	
+	location ~ \.php$
 	{
+		try_files $uri =404;
+
 		include fastcgi_params;
-		<% if options['env_vars']; options['env_vars'].each do |key,value| %>
-		fastcgi_param <%= key %> <%= value %>;
-		<% end; end %>
-		fastcgi_param SCRIPT_FILENAME $document_root/index.php;
-		fastcgi_pass 127.0.0.1:9000;
+		fastcgi_index index.php;
+		fastcgi_param SCRIPT_FILENAME $document_root$fastcgi_script_name;
+		fastcgi_pass unix:/var/run/php5-fpm.sock;
 	}
 }

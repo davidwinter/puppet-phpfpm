@@ -11,35 +11,7 @@ Clone this into your modules directory. Then in your manifests file, add the fol
 		root		=> '/path/to/docroot',
 	}
 
-That's it! If you was expecting more, well, there are a few additional options you can include:
-
- * `client_max_body_size`
- * `fastcgi_read_timeout`
- * `remove_indexphp_from_url` - adds a rewrite rule that removes `index.php` from url's
- * `static_paths` - an array containing directories that nginx should serve rather than php-fpm.
- * `maintenance_page` - a file path, that when present will redirect requests to it
- * `env_vars` - a hash of environment variables to pass through to php-fpm
-
-These options are passed through in a hash to the options parameter. An example:
-
-	phpfpm::nginx::vhost { 'vhost_name':
-		root => '/vagrant/public',
-		server_name => 'your.domain.com',
-		options => {
-			static_paths => [
-				'uploads/images',
-				'css',
-				'js',
-			],
-			maintenance_page => 'maintenance.html',
-			remove_indexphp_from_url => true,
-			fastcgi_read_timeout => 1800,
-			client_max_body_size => '100M',
-			env_vars => { 
-				'SITE_ENV' => 'development',
-			},
-		},
-	}
+That's it! If you was expecting more, well, sorry!
 
 ## Basic nginx virtual host?
 
