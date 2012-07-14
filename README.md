@@ -11,6 +11,7 @@ Clone this into your modules directory. Then in your manifests file, add the fol
 	phpfpm::nginx::vhost { 'vhost_name':
 		server_name => 'your.domain.com',
 		root		=> '/path/to/docroot',
+		index       => 'app.php', # optional, defaults to index.php
 	}
 
 That's it! If you was expecting more, well, sorry!
