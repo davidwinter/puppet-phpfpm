@@ -2,6 +2,7 @@ define phpfpm::nginx::vhost (
 	$vhost = $title,
 	$root = '/var/www',
 	$server_name = '_',
+	$index = 'index.php',
 	$options = {},
 ) {
 	
