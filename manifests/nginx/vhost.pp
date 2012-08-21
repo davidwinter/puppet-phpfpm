@@ -3,6 +3,7 @@ define phpfpm::nginx::vhost (
 	$root = '/var/www',
 	$server_name = '_',
 	$index = 'index.php',
+	$upstream = '127.0.0.1:9000',
 	$custom = '',
 	$options = {},
 ) {
