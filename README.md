@@ -13,6 +13,7 @@ Clone this into your modules directory. Then in your manifests file, add the fol
 		root		=> '/path/to/docroot',
 		index       => 'app.php', # optional, defaults to index.php
 		custom      => 'Your custom vhost.conf code', # optional
+		upstream    => '/var/run/php5-fpm.sock', # optional, defaults to localhost:9000
 	}
 
 That's it! If you was expecting more, well, sorry!
