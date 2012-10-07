@@ -6,14 +6,12 @@ This puppet module aims to be lightweight and help you get an nginx virtual host
 
 Clone this into your modules directory. Then in your manifests file, add the following:
 
-	include phpfpm
+	class { 'phpfpm': }
 
-	phpfpm::nginx::vhost { 'vhost_name':
-		server_name => 'your.domain.com',
-		root		=> '/path/to/docroot',
-		index       => 'app.php', # optional, defaults to index.php
-		custom      => 'Your custom vhost.conf code', # optional
-		upstream    => '/var/run/php5-fpm.sock', # optional, defaults to 127.0.0.1:9000
+	nginx::vhost { 'your.domain.com':
+		root     => '/vagrant',
+		index    => 'index.php',
+		template => 'nginx/vhost.php.conf.erb',
 	}
 
 That's it! If you was expecting more, well, sorry!
