@@ -12,7 +12,7 @@ If you're looking for basic nginx functionallity instead, check out my other mod
 
 With librarian-puppet, add the following to your Puppetfile:
 
-	mod 'postfix',
+	mod 'phpfpm',
 		:git => 'git://github.com/davidwinter/puppet-phpfpm.git'
 
 Then run `librarian-puppet install`.
