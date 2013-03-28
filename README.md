@@ -1,10 +1,23 @@
-This puppet module aims to be lightweight and help you get an nginx virtual host with php-fpm up and running quickly. It was developed with Vagrant in mind so that I could get a web environment up and running in as few lines as possible.
+# puppet-phpfpm
 
-**Note**: This module depends on my other, [nginx](https://github.com/davidwinter/puppet-nginx), in order for nginx to be installed and started.
+This puppet module aims to be lightweight and help you get an `nginx` virtual host with `php-fpm` up and running quickly. It was developed with `vagrant` in mind so that I could get a web environment up and running in as few lines as possible.
 
-## How to use
+If you're looking for basic nginx functionallity instead, check out my other module, [nginx](https://github.com/davidwinter/puppet-nginx).
 
-Clone this into your modules directory. Then in your manifests file, add the following:
+## Dependencies
+
+ * [nginx](https://github.com/davidwinter/puppet-nginx)
+
+## Install
+
+With librarian-puppet, add the following to your Puppetfile:
+
+	mod 'postfix',
+		:git => 'git://github.com/davidwinter/puppet-phpfpm.git'
+
+Then run `librarian-puppet install`.
+
+## Usage
 
 	class { 'phpfpm': }
 
@@ -14,12 +27,13 @@ Clone this into your modules directory. Then in your manifests file, add the fol
 		template => 'nginx/vhost.php.conf.erb',
 	}
 
-That's it! If you was expecting more, well, sorry!
+The main thing to note here is that we're using the `vhost.php.conf.erb` template from the `nginx` module instead of the default one. If you need to customise the PHP settings in the `nginx` virtual host, you should copy the original, make changes and then store them in your own module.
 
-## Basic nginx virtual host?
+## Author
 
-If you're looking for basic nginx functionallity instead, check out my other module, [nginx](https://github.com/davidwinter/puppet-nginx).
+David Winter <i@djw.me>
 
-## Contribute
+## Licence
 
-Please feel free to submit pull requests for any other basic functionallity you think this module should include.
+MIT
+
